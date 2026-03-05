@@ -10,11 +10,22 @@ import numpy as np
 from PIL import Image
 import io
 import json
+import os
+import urllib.request
 
 # 2. Create the app object
 app = FastAPI(title="Coral Reef Classifier", 
               description="Classify coral images as healthy, bleached, or dead",
               version="1.0.0")
+
+# Download model from GitHub Releases if not present
+model_path = 'model/coral_final_model.keras'
+if not os.path.exists(model_path):
+    print("📥 Downloading model from GitHub Releases...")
+    os.makedirs('model', exist_ok=True)
+    url = "https://github.com/raylyhfml232-debug/coralapi/releases/download/v1.0.0/coral_final_model.keras"
+    urllib.request.urlretrieve(url, model_path)
+    print("✅ Model downloaded!")
 
 # Load your trained model
 print("Loading model...")
