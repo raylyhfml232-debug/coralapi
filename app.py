@@ -21,11 +21,11 @@ app = FastAPI(title="Coral Reef Classifier",
 # Download model from GitHub Releases if not present
 model_path = 'model/coral_final_model.keras'
 if not os.path.exists(model_path):
-    print("📥 Downloading model from GitHub Releases...")
+    print("Downloading model from GitHub Releases...")
     os.makedirs('model', exist_ok=True)
     url = "https://github.com/raylyhfml232-debug/coralapi/releases/download/v1.0.0/coral_final_model.keras"
     urllib.request.urlretrieve(url, model_path)
-    print("✅ Model downloaded!")
+    print("Model downloaded!")
 
 # Load your trained model
 print("Loading model...")
@@ -39,7 +39,7 @@ print(f"Model loaded! Classes: {list(idx_to_class.values())}")
 @app.get('/')
 def index():
     return {
-        'message': '🌊 Coral Reef Classifier API',
+        'message': 'Coral Reef Classifier API',
         'endpoints': {
             '/': 'This message',
             '/health': 'Health check',
@@ -92,3 +92,4 @@ async def predict(file: UploadFile = File(...)):
 # 7. Run the API
 if __name__ == '__main__':
     uvicorn.run(app, host='0.0.0.0', port=8000)
+
